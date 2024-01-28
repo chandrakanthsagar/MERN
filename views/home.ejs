@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>Document</title>
+    <style>
+        .cont{
+            position: absolute;
+            left:40%; 
+            top: 10%;
+            align-items: center;
+            justify-content: center;
+           
+        }
+      .contact2{
+        position: absolute;
+        left: 40%;
+        top: 55%;
+      }
+
+    </style>
+</head>
+<body>
+    <div class="cont">
+        <%- include('header');%>
+        <button id="logoutbutton">Logout</button>
+        <ul>
+            <% for (let i of contact_list) { %>
+            <li>
+                <p style="color: black;"><%= i.name %></p>
+                <p><%=i.phone%></p>
+                <a href="/deletecontact?id=<%=i._id%>">Delete</a>
+            </li>
+            <% } %>
+        </ul>
+        <form action="/createcontact" method="post">
+            <input type="text" name="name" placeholder="Enter name">
+            <input type="text" name="phone" placeholder="Enter phone">
+
+            <button type="submit">Add contact</button>
+
+        </form>
+    </div>
+    <script>
+        document.getElementById('logoutbutton').addEventListener('click',function(){
+            logout();
+        })
+
+        function logout() {
+            console.log("cursor in the logout");
+
+            fetch('/logout',{
+                method:"GET"
+            })
+            // .then(response => {
+            //     console.log(response.status);
+            //     if (response.ok) {
+            //         // Logout was successful, redirect to the login page
+            //         console.log("Logout successful");
+            //         window.location.href = '/login';
+            //     } else {
+            //         // Handle non-successful response (e.g., server error)
+            //         console.error('Logout failed');
+            //     }
+            // })
+            // .catch(error => {
+            //     // Handle network errors or other issues
+            //     console.error('Error:', error);
+            // });
+        }
+
+
+    </script>
+</body>
+</html>
